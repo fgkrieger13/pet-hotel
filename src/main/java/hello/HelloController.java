@@ -27,8 +27,27 @@ public class HelloController {
             query, new PetRowMapper());
           return pets;
     }
-        
-    @RequestMapping("/pet")
+     
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    @RequestMapping("/pet:")
     public List<Pet> deleteAPet() {
         String query = "DELETE FROM pets WHERE id = '7'";
         // String query2 = "DELETE FROM pets WHERE id = '2';";
