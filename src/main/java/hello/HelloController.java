@@ -27,7 +27,9 @@ public class HelloController {
             query, new PetRowMapper());
           return pets;
     }
-        
-    
-    
+    @RequestMapping("postPets")
+    public void postAllPets(){
+        String query = "INSERT INTO pets (name,breed,color) VALUES ('Chelsea','dog','black')";
+        jdbcTemplate.query(query, new PetRowMapper());
+    }
 }
