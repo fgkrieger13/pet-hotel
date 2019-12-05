@@ -20,6 +20,7 @@ public class HelloController {
         return "Greetings from Spring Boot!";
     }
 
+    // GET route
     @RequestMapping("/pets")
     public List<Pet> getAllPets() {
         String query = "SELECT * FROM pets";
@@ -27,9 +28,18 @@ public class HelloController {
             query, new PetRowMapper());
           return pets;
     }
+
+    // POST route
     @RequestMapping("postPets")
     public void postAllPets(){
         String query = "INSERT INTO pets (name,breed,color) VALUES ('Chelsea','dog','black')";
+        jdbcTemplate.query(query, new PetRowMapper());
+    }
+
+    // PUT route
+    @RequestMapping("putPets")
+    public void putAllPets(){
+        String query = "UPDATE pets SET name='Barney' WHERE id=2";
         jdbcTemplate.query(query, new PetRowMapper());
     }
 }
