@@ -4,7 +4,8 @@ public class Pet {
 
   private int id;
   private String name;
-  private String type;
+  private String breed;
+  private String color;
 
   public int getId() {
     return this.id;
@@ -22,22 +23,31 @@ public class Pet {
     this.name = name;
   }
 
-  public String getType() {
-    return this.type;
+  public String getBreed() {
+    return this.breed;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setBreed(String breed) {
+    this.breed = breed;
+  }
+
+  public String getColor() {
+    return this.color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
   }
 
  
 
   public Pet() {}
 
-  public Pet(int id, String name, String type) {
+  public Pet(int id, String name, String breed, String color ) {
     this.id = id;
     this.name = name;
-    this.type = type;
+    this.breed = breed;
+    this.color = color;
 
   }
   
