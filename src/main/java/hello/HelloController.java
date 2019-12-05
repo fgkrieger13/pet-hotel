@@ -6,6 +6,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import hello.Pet;
 
@@ -27,9 +31,10 @@ public class HelloController {
             query, new PetRowMapper());
           return pets;
     }
-    @RequestMapping("postPets")
-    public void postAllPets(){
-        String query = "INSERT INTO pets (name,breed,color) VALUES ('Chelsea','dog','black')";
+    @RequestMapping("/postPets/{name}/{type}/{color}")
+    public int postAllPets(@PathVariable String name, @PathVariable String type, @PathVariable String color){ 
+        String query = "INSERT INTO pets (name,breed,color) VALUES ('" + name + "','"+ type + "','"+ color +"')";
         jdbcTemplate.query(query, new PetRowMapper());
+        return 200; // SHOULD return OK :(
     }
 }
