@@ -28,6 +28,13 @@ public class HelloController {
           return pets;
     }
         
-    
+    @RequestMapping("/pet")
+    public List<Pet> deleteAPet() {
+        String query = "DELETE FROM pets WHERE id = '7'";
+        // String query2 = "DELETE FROM pets WHERE id = '2';";
+        List<Pet> pets = jdbcTemplate.query(
+            query, new PetRowMapper());
+          return pets;
+    }
     
 }
