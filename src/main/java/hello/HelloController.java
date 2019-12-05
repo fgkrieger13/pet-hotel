@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.jdbc.core.JdbcTemplate;
-import hello.Book;
+import hello.Pet;
 
 @RestController
 public class HelloController {
@@ -20,12 +20,12 @@ public class HelloController {
         return "Greetings from Spring Boot!";
     }
 
-    @RequestMapping("/book")
-    public List<Book> getAllBooks() {
-        String query = "SELECT * FROM books";
-        List<Book> books = jdbcTemplate.query(
-            query, new BookRowMapper());
-          return books;
+    @RequestMapping("/pets")
+    public List<Pet> getAllPets() {
+        String query = "SELECT * FROM pets";
+        List<Pet> pets = jdbcTemplate.query(
+            query, new PetRowMapper());
+          return pets;
     }
         
     
