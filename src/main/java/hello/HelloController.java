@@ -28,14 +28,13 @@ public class HelloController {
     @RequestMapping("/pets")
     public List<Pet> getAllPets() {
         String query = "SELECT * FROM pets";
-        List<Pet> pets = jdbcTemplate.query(
-            query, new PetRowMapper());
+        List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
           return pets;
     }
     @RequestMapping("/postPets/{name}/{breed}/{color}")
-    public ResponseEntity<String> postAllPets(@PathVariable String name, @PathVariable String breed, @PathVariable String color){ 
-        String query = "INSERT INTO pets (name,breed,color) VALUES ('" + name + "','"+ breed + "','blue')";
-        jdbcTemplate.query(query, new PetRowMapper());
-        return new ResponseEntity<>(HttpStatus.OK); // SHOULD return OK :(
+    public ResponseEntity<> postAllPets(@PathVariable String name, @PathVariable String breed, @PathVariable String color){ 
+        String query = "INSERT INTO pets (name, breed, color) VALUES ('" + name + "','"+ breed + "','"+ color +"') RETURNING *";
+        List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
+        return pets; // SHOULD return OK :(
     }
 }
