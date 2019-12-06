@@ -33,7 +33,7 @@ public class HelloController {
           return pets;
     }
     @RequestMapping("/postPets/{name}/{breed}/{color}")
-    public ResponseEntity<> postAllPets(@PathVariable String name, @PathVariable String breed, @PathVariable String color){ 
+    public List<Pet> postAllPets(@PathVariable String name, @PathVariable String breed, @PathVariable String color){ 
         String query = "INSERT INTO pets (name, breed, color) VALUES ('" + name + "','"+ breed + "','"+ color +"') RETURNING *";
         List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
         return pets; // SHOULD return OK :(
