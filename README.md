@@ -11,7 +11,9 @@ Install gradle if you haven't already with 'brew install gradle'. [Instructions 
 
 To start your server, type `gradle bootRun` in your terminal.
 
-Go to: http://localhost:8080/
+Go to: http://localhost:8080/pets/
+
+Go to: application.properties username to name in your terminal.
 
 You should see the hello greeting from the `HelloController` file for GET "/"
 
