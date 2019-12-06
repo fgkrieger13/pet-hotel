@@ -6,6 +6,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import hello.Pet;
 
@@ -24,17 +29,14 @@ public class HelloController {
     @RequestMapping("/pets")
     public List<Pet> getAllPets() {
         String query = "SELECT * FROM pets";
-        List<Pet> pets = jdbcTemplate.query(
-            query, new PetRowMapper());
+        List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
           return pets;
     }
-
-    // POST route
-    @RequestMapping("postPets")
-    public void postAllPets(){
-        String query = "INSERT INTO pets (name,breed,color) VALUES ('Chelsea','dog','black')";
-        jdbcTemplate.query(query, new PetRowMapper());
-    }
+    @RequestMapping("/postPets/{name}/{breed}/{color}")
+    public ResponseEntity<> postAllPets(@PathVariable String name, @PathVariable String breed, @PathVariable String color){ 
+        String query = "INSERT INTO pets (name, breed, color) VALUES ('" + name + "','"+ breed + "','"+ color +"') RETURNING *";
+        List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
+        return pets; // SHOULD return OK :(
 
     // PUT route
     @RequestMapping("putPets")
