@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import hello.Pet;
@@ -31,10 +32,10 @@ public class HelloController {
             query, new PetRowMapper());
           return pets;
     }
-    @RequestMapping("/postPets/{name}/{type}/{color}")
-    public int postAllPets(@PathVariable String name, @PathVariable String type, @PathVariable String color){ 
-        String query = "INSERT INTO pets (name,breed,color) VALUES ('" + name + "','"+ type + "','"+ color +"')";
+    @RequestMapping("/postPets/{name}/{breed}/{color}")
+    public ResponseEntity<String> postAllPets(@PathVariable String name, @PathVariable String breed, @PathVariable String color){ 
+        String query = "INSERT INTO pets (name,breed,color) VALUES ('" + name + "','"+ breed + "','blue')";
         jdbcTemplate.query(query, new PetRowMapper());
-        return 200; // SHOULD return OK :(
+        return new ResponseEntity<>(HttpStatus.OK); // SHOULD return OK :(
     }
 }
