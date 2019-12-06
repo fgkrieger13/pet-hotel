@@ -25,6 +25,7 @@ public class HelloController {
         return "Greetings from Spring Boot!";
     }
 
+    // GET route
     @RequestMapping("/pets")
     public List<Pet> getAllPets() {
         String query = "SELECT * FROM pets";
@@ -36,5 +37,11 @@ public class HelloController {
         String query = "INSERT INTO pets (name, breed, color) VALUES ('" + name + "','"+ breed + "','"+ color +"') RETURNING *";
         List<Pet> pets = jdbcTemplate.query(query, new PetRowMapper());
         return pets; // SHOULD return OK :(
+
+    // PUT route
+    @RequestMapping("putPets")
+    public void putAllPets(){
+        String query = "UPDATE pets SET name='Barney' WHERE id=2";
+        jdbcTemplate.query(query, new PetRowMapper());
     }
 }
